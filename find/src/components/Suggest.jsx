@@ -2,7 +2,7 @@ import React from "react";
 import { Menu } from "antd";
 import { Form, Input, Radio} from 'antd';
 import  "./Suggest.css";
-const Suggest = () => {
+const Suggest = (props) => {
   const menus = [
     { name: "Suggest up your task" },
   ];
@@ -13,11 +13,12 @@ const Suggest = () => {
       </Menu.Item>
     ));
   };
-  const [value, setValue] = React.useState(1);
+  const [suggest, setSuggest] = React.useState(1);
 
   const onChange = e => {
     console.log('radio checked', e.target.value);
-    setValue(e.target.value);
+    setSuggest(e.target.value);
+    props.suggest(e.target.value);
   };
 
   const onFinish = (values) => {
@@ -68,20 +69,6 @@ const Suggest = () => {
         ]}
       >
         </Form.Item>
-        <Form.Item label=" "
-        name="budget"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your suggest!',
-          },
-        ]}>
-        <Radio.Group onChange={onChange} value={value}>
-        <Radio value={1}>Total</Radio>
-        <Radio value={2}> Hourly rate</Radio>
-      </Radio.Group>
-      </Form.Item>
-
       <Form.Item label=" "
         name="budget"
         rules={[
@@ -90,7 +77,36 @@ const Suggest = () => {
             message: 'Please input your suggest!',
           },
         ]}>
-        <Input />
+        <Radio.Group onChange={onChange} suggest={suggest}>
+        <Radio value={1}>Total</Radio>
+        <Radio value={2}> Hourly rate</Radio>
+        </Radio.Group>
+      </Form.Item>
+      </Form>
+      <Form
+      name="basic"
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item label=" "
+        name="budget"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your suggest!',
+          },
+        ]}>
+        <Input onChange={(e)=>{props.number(e.target.value)}}/>
 
       </Form.Item>
 

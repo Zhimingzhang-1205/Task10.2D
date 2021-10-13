@@ -1,0 +1,14 @@
+.expert {
+    overflow: hidden;
+    width: 30%;
+    margin-top: 5px;
+    margin-right: 2%;
+    max-height: 50vh;
+    float: left;
+  }
+
+img{
+  height: 80px;
+  width: 200px;
+}
+  
