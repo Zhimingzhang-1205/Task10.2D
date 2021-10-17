@@ -227,6 +227,34 @@ app.route('/newtask')
     )
 })
 
+app.route('/newtask/:id')
+.delete((req,res) =>{
+    tasks.deleteMany(
+        {title: req.params.id},
+        (err) =>{
+        if (err) {res.json(err)}
+        else {res.json('Successfully deleted this task!')}
+    })
+})
+.get((req, res)=>{
+    tasks.find({title: req.params.id}, (err, found)=>{
+        if (found.length!=0) {
+            console.log('title');
+            res.json(found);
+        }
+        else {
+            tasks.find({date: req.params.id}, (err, found)=>{
+                if (found.length!=0) (res.json(found))
+                else {
+                    tasks.find({suburb: req.params.id}, (err, found)=>{
+                        if (found.length!=0) (res.json(found))
+                        else res.json("No Matched Expert Found!")
+                    })
+                }
+            })
+        }
+    })
+})
 
 app.listen(process.env.PORT || 8000, ()=>{
     console.log('Server started on port 8000');

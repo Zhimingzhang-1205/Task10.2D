@@ -3,9 +3,12 @@
     width: 30%;
     margin-top: 5px;
     margin-right: 2%;
-    max-height: 50vh;
+    max-height: 200vh;
     float: left;
   }
+button{
+  float: right;
+}
 
 img{
   height: 80px;
